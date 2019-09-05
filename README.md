@@ -61,7 +61,7 @@
    reset           //Back to default
 ```
 
-### Use case
+## Use case
  Ideal applications include
  
  - USB controlled desk lighting
