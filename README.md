@@ -5,9 +5,12 @@
  This Project is the start of an arduino based, *dumb* RGB strip controller useing PWM.
  None of that fancy addressable stuff here kids.
  
-### Features 
+ My hope is to replace my existing RGB LED controller. I'm tired of useing the chintzy remote,
+ and I feel it has limited lighting options.
+ 
+### Current Features 
  - USB serial communications, for sending commands from the PC using the command line interface.
- - Super Basic command stucture.
+ - Super Basic command structure.
  - Fast response time.
  - User programmable color palette, up to 10 unique colors.
  - User programmable color sequence.
@@ -48,7 +51,7 @@
    set NNNNNN     : This sets one color at a time, color 1 - color 10, in
                     that order. Colors are set in HEX
    -- example --
-   new
+   new			   //Clears current colors
    set 00FF00      //Sets GREEN, color 1
    set FF0000      //Sets RED, color 2
    fade            //Fades between color 1 and color 2
@@ -57,6 +60,18 @@
    res 100         //Sets the resolution to 100, 20ms per subcycle
    reset           //Back to default
 ```
+
+### Use case
+ Ideal applications include
+ 
+ - USB controlled desk lighting
+ - USB controlled PC case lighting
+
+## Setup
+ Once the arduino has been programmed with *RGBcom* your ready to controll your LEDs over USB with commands.
+ 
+ **Hardware setup will also be required, see the hardware section below.**
+
 
 ## Hardware
  Work in progress...
