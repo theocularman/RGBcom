@@ -51,7 +51,7 @@
    set NNNNNN     : This sets one color at a time, color 1 - color 10, in
                     that order. Colors are set in HEX
    -- example --
-   new			   //Clears current colors
+   new             //Clears current colors
    set 00FF00      //Sets GREEN, color 1
    set FF0000      //Sets RED, color 2
    fade            //Fades between color 1 and color 2
