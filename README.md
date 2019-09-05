@@ -13,10 +13,10 @@
  - User programmable color sequence.
  - 3 operating modes, **Flash**, **Fade** and **Breath**.
  - User programmable speed and resolution (for fade sensitivity).
- - Common Anode / Cathode, '''Led led(R_PIN, G_PIN, B_PIN, COMMON_ANODE); //LED class object'''
+ - Common Anode / Cathode, ```Led led(R_PIN, G_PIN, B_PIN, COMMON_ANODE); //LED class object```
  
 ### Command Help
-'''
+```
    RGB LED controler with commandline interface
    up to 10 user configurable colors, 3 modes,
    delay & resolution control.
@@ -56,7 +56,7 @@
    res 50          //Sets resolution to 50, 2000/50= 40ms per subcycle
    res 100         //Sets the resolution to 100, 20ms per subcycle
    reset           //Back to default
-'''
+```
 
 ## Hardware
  Work in progress...
