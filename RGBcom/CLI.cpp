@@ -1,11 +1,12 @@
-/* 
- *  CLI.cpp
- *  
- * Class Referance
- * 95% Borrowed Code
- * https://www.norwegiancreations.com/2018/02/creating-a-command-line-interface-in-arduinos-serial-monitor/
- * 
- */
+/*
+   CLI.h
+   95% Borrowed Code
+
+   Class Referance
+   https://www.norwegiancreations.com/2018/02/creating-a-command-line-interface-in-arduinos-serial-monitor/
+
+*/
+
 #include "Arduino.h"
 #include "cli.h"
 
@@ -24,7 +25,8 @@ bool CLI::readLine(void) {
   if (Serial.available()) { //If ya got something
     String string = Serial.readStringUntil("\n");      //Read till new line, or break after timeout
     if (strlen(string.c_str()) < LINE_BUF_SIZE) {      //Buffer check
-      string.toCharArray(line, LINE_BUF_SIZE);  //Add to line buffer 
+      string.toCharArray(line, LINE_BUF_SIZE);         //Add to line buffer
+      //Serial.print("~ "); Serial.print(string);      //echos input sting, might remove later
     }
     else {
       Serial.println("Input string too long.");
@@ -80,20 +82,16 @@ int CLI::execute(void) {
       return (*_commands_func[i])();
     }
   }
-
-  //memset(line, 0, LINE_BUF_SIZE);
-  //memset(args, 0, sizeof(args[0][0]) * MAX_NUM_ARGS * ARG_BUF_SIZE);
-  
   Serial.print(args[0]);
   Serial.println(" is an Invalid command.");
   return 0;
 }
 
-unsigned long CLI::get_argUlong(void) {
+unsigned long CLI::getArgUlong(void) {
   unsigned long temp = strtoul(args[1], NULL, 16);
   return temp;
 }
 
-int CLI::get_argInt(void) {
+int CLI::getArgInt(void) {
   return atoi(args[1]);
 }

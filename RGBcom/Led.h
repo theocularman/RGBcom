@@ -1,62 +1,48 @@
 /*
-   Copyright (C) 2013-2014 Ladislas de Toldi <ladislas at weareleka dot com> and Leka <http://weareleka.com>
+   File: Led.h
+   Adapted from https://github.com/leka/moti/tree/dev/lib/Led
 
-   This file is part of Moti, a spherical robotic smart toy for autistic children.
+*/
 
-   Moti is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   Moti is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with Moti. If not, see <http://www.gnu.org/licenses/>.
-   */
-
-#ifndef LEKA_MOTI_CLASS_LED_H_
-#define LEKA_MOTI_CLASS_LED_H_
-
-//mode definitions
-#define COMMON_ANODE 1
-#define COMMON_CATHODE 0
-
-/**
- * @file Led.h
- * @author Ladislas de Toldi
- * @version 1.0
- */
+#ifndef LED_H
+#define LED_H
 
 #include "Arduino.h"
 #include "Color.h"
 
-/**
- * @class Led
- * @brief Led library gathers all the LED functions for Moti.
- */
+//Mode definitions
+#define COMMON_ANODE 1
+#define COMMON_CATHODE 0
 
 class Led {
-	public:
-		Led();
-		Led(uint8_t redPin, uint8_t greenPin, uint8_t bluePin, bool modeFlag);
-		Led(uint8_t redPin, uint8_t greenPin, uint8_t bluePin, Color colorValue, bool modeFlag);
+  public:
+    Led();
+    Led(uint8_t redPin, uint8_t greenPin, uint8_t bluePin, bool acFlag);
+    Led(uint8_t redPin, uint8_t greenPin, uint8_t bluePin, Color colorValue, bool acFlag);
 
-		void shine(void);
-		void shine(Color colorValue);
-		void shine(uint8_t redValue, uint8_t greeValue, uint8_t blueValue);
+    Color dim(Color colorValue, uint8_t level); //0% - 100%
+    Color dim(uint8_t redValue, uint8_t greeValue, uint8_t blueValue, uint8_t level); //0% - 100%
 
-		void turnOff(void);
+    void CATHODE(void);
+    void ANODE(void);
 
-		Color getColor(void);
-		void setColor(Color colorValue);
+    void shine(void);
+    void shine(Color colorValue);
+    void shine(Color colorValue, uint8_t level);
+    void shine(uint8_t redValue, uint8_t greeValue, uint8_t blueValue);
+    void shine(uint8_t redValue, uint8_t greeValue, uint8_t blueValue, uint8_t level);
 
-	protected:
-    bool commonMode;
-		uint8_t _redPin, _greenPin, _bluePin;
-		Color _colorValue;
+    void turnOff(void);
+
+    Color getColor(void);
+    void setColor(Color colorValue);
+    void setColor(Color colorValue, uint8_t level);
+
+  protected:
+    bool _AC;
+    uint8_t _redPin, _greenPin, _bluePin;
+    Color _colorValue;
 };
+
 
 #endif

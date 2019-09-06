@@ -1,11 +1,11 @@
-/* 
- *  CLI.h
- *  
- * Class Referance
- * 95% Borrowed Code
- * https://www.norwegiancreations.com/2018/02/creating-a-command-line-interface-in-arduinos-serial-monitor/
- * 
- */
+/*
+   CLI.h
+   95% Borrowed Code
+
+   Class Referance
+   https://www.norwegiancreations.com/2018/02/creating-a-command-line-interface-in-arduinos-serial-monitor/
+
+*/
 
 #ifndef CLI_H
 #define CLI_H
@@ -19,8 +19,8 @@ class CLI {
   public:
     void init(int (*cf[])(), const char *cs[], int _s); //Inits things
     bool worker(void);                                  //Worker function, gets called from loop
-    unsigned long get_argUlong(void);                   //Gets user argument
-    int get_argInt(void);                               //Gets user argument
+    unsigned long getArgUlong(void);                   //Gets user argument
+    int getArgInt(void);                               //Gets user argument
 
   private:
     bool error_flag;                        //ERR flag
