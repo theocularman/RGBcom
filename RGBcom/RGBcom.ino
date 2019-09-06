@@ -131,7 +131,7 @@ void loop() {
     Color _end = RGB.getEnd();
 
     int _step = 0;
-    while (_step <= RGB.getSmooth())
+    while (_step < RGB.getSmooth()) //Derp, idk how I missed that
     {
       unsigned long currentMillis = millis();
       if ((currentMillis - previousMillis >= RGB.getTime()))
