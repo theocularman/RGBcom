@@ -6,8 +6,8 @@
    User configurable smoothing.
    User configurable intensity control.
 
-   Sketch uses 9596 bytes
-   Global variables use 524 bytes of dynamic memory
+   Sketch uses 12030 bytes
+   Global variables use 596 bytes of dynamic memory
 
    Author: The Ocular Man  (⌐0_0)
    Date:   9/6/2019
@@ -21,13 +21,13 @@
    pulse    : This enters the pulse mode
    off      : Turns LEDs off
    on       : Turns LEDs on
-   save     : Save to EEPROM, loaded @ start
+   save     : Saves to EEPROM, loaded @ start
    dump     : Dumps current settings
 
    --- Settings ---------------------------------------------------
    reset        : This puts everything back into defalt (rgb flash)
    delay n      : This sets the total delay time per cycle
-   dim n        : dims the lights 0% - 100%, default is 90%
+   dim n        : This dims the lights 0% - 100%, default is 90%
    smooth n     : This sets the resolution of the cycle
    <notes>        The delay between cycles can be calulated like this
                   delay/res = cycle delay

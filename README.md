@@ -31,8 +31,8 @@
    User configurable smoothing.
    User configurable intensity control.
 
-   Sketch uses 9596 bytes
-   Global variables use 524 bytes of dynamic memory
+   Sketch uses 12030 bytes
+   Global variables use 596 bytes of dynamic memory
 
    Author: The Ocular Man  (⌐0_0)
    Date:   9/6/2019
