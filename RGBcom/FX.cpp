@@ -35,6 +35,14 @@ Color FX::getEnd(void) {
   return _end;
 }
 
+Color FX::getColorAtMod(uint8_t n) {
+  return _palette[n % _palette_size];
+}
+
+void FX::countColor(int &n) { //Bounds rte fix
+  n = (n + 1) % _palette_size;
+}
+
 void FX::refresh(void) {
   if (_palette_size == 0) {
     _start = Color::Black;
@@ -67,20 +75,20 @@ void FX::fxCount(void) {
     return;
   }
   if ((_mode == 0) || (_mode == 1)) {
-    _start = _palette[_color_count % _palette_size];
-    _end = _palette[(_color_count + 1) % _palette_size];
-    _color_count++;
+    _start = getColorAt(_color_count);
+    _end = getColorAtMod(_color_count + 1);
+    countColor(_color_count);
     return;
   }
   if (_mode == 2) {
     if (_pulse_count) {
       _start = Color::Black;
-      _end = _palette[_color_count % _palette_size];
+      _end = getColorAt(_color_count);
     }
     else {
-      _start = _palette[_color_count % _palette_size];
+      _start = getColorAt(_color_count);
       _end = Color::Black;
-      _color_count++;
+      countColor(_color_count);
     }
     _pulse_count = !_pulse_count;
     return;

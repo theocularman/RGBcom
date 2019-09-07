@@ -22,6 +22,8 @@ class FX : public Token {
     int getTime(void);
     int getSmooth(void);
     uint8_t getIntensity(void);
+    Color getColorAtMod(uint8_t n);
+    void countColor(int &n);
 
     Color getStart(void);
     Color getEnd(void);
