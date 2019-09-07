@@ -21,10 +21,8 @@
    pulse    : This enters the pulse mode
    off      : Turns LEDs off
    on       : Turns LEDs on
-   save     : Save to EEPROM, loaded @ start
-   dump     : Dumps current settings
 
-   --- Settings ---------------------------------------------------
+   --- Parm settings ---------------------------------------------------
    reset        : This puts everything back into defalt (rgb flash)
    delay n      : This sets the total delay time per cycle
    dim n        : dims the lights 0% - 100%, default is 90%
@@ -38,18 +36,16 @@
    set NNNNNN     : This sets one color at a time, color 1 - color 10, in
                     that order. Colors are set in HEX, 'FF00FF'.
    -- example -----------------------------------------------------------
-   new                // Clears current colors
-   set 00FF00         // Sets GREEN, color 1
-   set FF0000         // Sets RED, color 2
-   fade               // Fades between color 1 and color 2
-   delay 2000         // Sets delay to 2000ms
-   smooth 50          // Sets resolution to 50, 2000/50= 40ms per subcycle
-   pulse              // Sets pulse mode
-   smooth 100         // Sets the resolution to 100, 20ms per subcycle
-   dim 50             // Dims the light level to 50%
-   reset              // Back to default
-   save               // Saves current settings to EEPROM, loaded @ start
-   dump               // Dumps settings
+   new                //Clears current colors
+   set 00FF00         //Sets GREEN, color 1
+   set FF0000         //Sets RED, color 2
+   fade               //Fades between color 1 and color 2
+   delay 2000         //Sets delay to 2000ms
+   smooth 50          //Sets resolution to 50, 2000/50= 40ms per subcycle
+   pulse              //Sets pulse mode
+   smooth 100         //Sets the resolution to 100, 20ms per subcycle
+   dim 50             //Dims the light level
+   reset              //Back to default
 
 */
 
@@ -79,8 +75,6 @@ int cmd_set();
 int cmd_off();
 int cmd_on();
 int cmd_dim();
-int cmd_save();
-int cmd_dump();
 
 //List of functions pointers corresponding to each command
 int (*commands_func[])() {
@@ -94,9 +88,7 @@ int (*commands_func[])() {
   &cmd_set,
   &cmd_off,
   &cmd_on,
-  &cmd_dim,
-  &cmd_save,
-  &cmd_dump
+  &cmd_dim
 };
 
 //List of command names
@@ -111,14 +103,12 @@ const char *commands_str[] = {
   "set",
   "off",
   "on",
-  "dim",
-  "save",
-  "dump"
+  "dim"
 };
 
 /* -------- Main junk ---------- */
 
-FX RGB;                                     //FX object
+FX RGB;
 Led led(R_PIN, G_PIN, B_PIN, COMMON_ANODE); //LED class object, COMMON_ANODE or COMMON_CATHODE
 CLI CommandLine;                            //LED CommandLine Interface
 
@@ -126,8 +116,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(BAUD);
   Serial.setTimeout(TIMEOUT); //Sets the read timeout
-  Serial.println(F("--| The Ocular Man - 2019 |--"));
-  Serial.println(F("RGB Terminal, Ready."));
+  Serial.println("RGBcom TestA");
   CommandLine.init(commands_func, commands_str, sizeof(commands_str) / sizeof(char *));
 }
 
@@ -249,6 +238,7 @@ int cmd_dim() {
 //Clears colors in buffer, well... just sets index to zero
 int cmd_new() {
   RGB.setNew(0);
+  //RGB.refresh();
   Serial.println("M Wipe");
   return 1;
 }
@@ -268,50 +258,18 @@ int cmd_set() {
   return 0;
 }
 
-int cmd_save() {
-  RGB.SavePer();
-  Serial.println(F("Saved to EEPROM"));
-  return 0;
-}
+/* --- notes-----
 
-//Dumps current settings
-int cmd_dump() {
-  Serial.println(F("-- Current --"));
-  uint8_t _t = RGB.getPsize();
-  int r = 0, g = 0, b = 0;
-  char _buff[11];
-  for (int i = 0; i < _t; i++) { //Print current colors, I'm forgetfull
-    Color _u = RGB.getColorAt(i);
-    r = _u.getR(); g = _u.getG(); b = _u.getB();
-    snprintf(_buff, 11, "set %02x%02x%02x", r, g, b);
-    Serial.println(_buff);
-  }
-  _t = RGB.getMode();
-  if (_t == 0)
-    Serial.println(F("flash"));
-  else if (_t == 1)
-    Serial.println(F("fade"));
-  else
-    Serial.println(F("fade"));
+   -- Fire Fx --
+   new
+   set bd0000
+   set ff3700
+   set 470000
+   set ff9100
+   set bd0000
+   set ff3700
+   fade
+   res 7      //4 - 10.. 20?
+   delay 400  //400 - 800
 
-  Serial.print(F("delay ")); Serial.println(RGB.getDelay());
-  Serial.print(F("smooth ")); Serial.println(RGB.getSmooth());
-  Serial.print(F("dim ")); Serial.println(RGB.getIntensity());
-  Serial.println(F("-------------"));
-  return 0;
-}
-
-/*
-  -- Current --
-  set bd0000
-  set ff3700
-  set 470000
-  set ff9100
-  set bd0000
-  set ff3700
-  fade
-  delay 400
-  smooth 7
-  dim 90
-  -------------
- */
+  ---------------- */
