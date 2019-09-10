@@ -2,7 +2,7 @@
  Arduino RGB Controller with Terminal
 
 ## Intro
- This Project is the start of an arduino based, *dumb* RGB strip controller useing PWM.
+ This Project is the start of an arduino based, *dumb* RGB strip controller using PWM.
  None of that fancy addressable stuff here kids.
  
  My hope is to replace my existing RGB LED controller. I'm tired of useing the chintzy remote,
